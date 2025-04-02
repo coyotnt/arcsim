@@ -47,7 +47,8 @@ try:
     if platform == 'linux-gcc':
         CXX = 'g++' # not quite right, but env is not yet available.
         import subprocess
-        version = subprocess.getoutput('%s -dumpversion' %CXX)
+        # version = subprocess.getoutput('%s -dumpversion' %CXX)
+	version = subprocess.check_output('%s -dumpversion' % CXX, shell=True).decode().strip()
         platform = 'linux-gcc-%s' %version
         print("Using platform '%s'" %platform)
         LD_LIBRARY_PATH = os.environ.get('LD_LIBRARY_PATH', '')
